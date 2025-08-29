@@ -70,4 +70,15 @@ public interface IConsoleUI
     /// Runs the main application loop
     /// </summary>
     Task RunAsync();
+
+    /// <summary>
+    /// Runs a Pokemon analysis without interactive prompts (for CI/testing)
+    /// </summary>
+    /// <param name="pokemonName">The name or ID of the Pokemon to analyze</param>
+    Task RunAnalysisAsync(string pokemonName);
+
+    /// <summary>
+    /// Gets or sets whether the application is running in command-line mode
+    /// </summary>
+    bool IsCommandLineMode { get; set; }
 }

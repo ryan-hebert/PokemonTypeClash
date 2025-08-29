@@ -27,6 +27,13 @@ run.bat
 dotnet run --project src/PokemonTypeClash.Console
 ```
 
+**🎁 No .NET? No Problem!**
+- Download pre-built executables from [Releases](https://github.com/ryan-hebert/PokemonTypeClash/releases)
+- **Single-file builds** (~50-80MB) for clean, compact downloads
+- **ARM64 support** for Apple Silicon (M1/M2) Macs
+- **Ready to run** - Proper permissions set for Linux/macOS
+- Extract and run - no .NET installation required!
+
 ### 3. Start Playing! 🎮
 - Use arrow keys or number keys to navigate
 - Choose "Analyze Pokemon Type Effectiveness"
@@ -50,6 +57,13 @@ The game provides comprehensive Pokemon battle analysis including:
 - **4GB RAM** (minimum)
 - **Internet connection** (for Pokemon data)
 
+**🎁 Alternative: Download pre-built executables**
+- No .NET installation required!
+- Available for Windows, macOS (Intel/ARM), and Linux
+- **Single-file builds** (~50-80MB) for clean downloads
+- **Ready to run** - Executable permissions already set
+- Download from [GitHub Releases](https://github.com/ryan-hebert/PokemonTypeClash/releases)
+
 ## 🔧 Installation Troubleshooting
 
 ### Windows Users
@@ -59,12 +73,25 @@ run.bat
 ```
 
 **If you don't have .NET installed:**
-1. Download .NET 9.0 SDK from [Microsoft](https://dotnet.microsoft.com/download)
-2. Run the installer
-3. Restart your command prompt
-4. Try `run.bat` again
+1. **Option A**: Install .NET 9.0 SDK from [Microsoft](https://dotnet.microsoft.com/download)
+2. **Option B**: Download pre-built executable from [Releases](https://github.com/ryan-hebert/PokemonTypeClash/releases)
+   - Download `PokemonTypeClash-win-x64.zip`
+3. Run the installer
+4. Restart your command prompt
+5. Try `run.bat` again
 
-### macOS/Linux Users
+### macOS Users
+Make sure the script is executable:
+```bash
+chmod +x run.sh
+./run.sh
+```
+
+**For Apple Silicon (M1/M2) Macs:**
+- Download `PokemonTypeClash-osx-arm64.tar.gz` for native ARM64 performance
+- Download `PokemonTypeClash-osx-x64.tar.gz` for Intel compatibility
+
+### Linux Users
 Make sure the script is executable:
 ```bash
 chmod +x run.sh
@@ -89,11 +116,11 @@ dotnet run --project src/PokemonTypeClash.Console
   ⚡ Types: Electric
 
   ┌─────────────────────────────────────────────────────────────────────────────┐
-  │  ⚔️  Strong Against: Water, Flying                                          │
-  │  🛡️  Weak Against: Ground, Grass, Dragon                                   │
-  │  💪 Resistant To: Electric, Flying, Steel                                  │
-  │  🚫 Immune To: None                                                        │
-  │  📊 Vulnerable To: Ground                                                  │
+  │   Strong Against: Water, Flying                                             │
+  │   Weak Against: Ground, Grass, Dragon                                       │
+  │   Resistant To: Electric, Flying, Steel                                     │
+  │   Immune To: None                                                           │
+  │   Vulnerable To: Ground                                                     │
   └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -119,6 +146,12 @@ dotnet test
 dotnet test tests/PokemonTypeClash.Core.Tests
 ```
 
+### Create Self-Contained Executables
+```bash
+# Build single-file executable (recommended for distribution)
+dotnet publish src/PokemonTypeClash.Console -c Release -o ./my-app --self-contained -r win-x64 -p:PublishSingleFile=true -p:PublishTrimmed=true
+```
+
 ### Project Structure
 ```
 src/
@@ -141,12 +174,17 @@ tests/
 
 **"Command not found: dotnet"**
 - Install .NET 9.0 SDK from [Microsoft](https://dotnet.microsoft.com/download)
+- **Or** download pre-built executable from [Releases](https://github.com/ryan-hebert/PokemonTypeClash/releases)
 
 **"Permission denied" on run.sh**
 - Run: `chmod +x run.sh`
 
 **"No such file or directory" on Windows**
 - Use `run.bat` instead of `run.sh`
+
+**"Permission denied" on downloaded executable**
+- The pre-built executables have proper permissions set
+- If you still get permission errors, run: `chmod +x PokemonTypeClash`
 
 **API errors or timeouts**
 - Check your internet connection
