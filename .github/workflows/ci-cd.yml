@@ -6,6 +6,13 @@ on:
   pull_request:
     branches: [ main, develop ]
 
+# Permissions needed for creating releases and uploading artifacts
+permissions:
+  contents: write
+  packages: write
+  actions: read
+  security-events: write
+
 env:
   DOTNET_VERSION: '9.0.x'
 
@@ -227,6 +234,7 @@ jobs:
           - 🎨 **Authentic Pokemon styling** - Pikachu yellow and Pokemon Red/Blue colors
           - 🛡️ **Comprehensive testing** - 57 tests ensure quality
           - 🔧 **Fixed permissions** - Linux/macOS executables ready to run
+          - 🧹 **Clean builds** - Minimal trim warnings for professional output
           
           ### Downloads
           
@@ -289,12 +297,14 @@ jobs:
           - Comprehensive error handling and retry logic
           - Cross-platform compatibility
           - Proper executable permissions for Linux/macOS
+          - Clean trim analysis with minimal warnings
           
           ---
           
           **Ready to become a Pokemon master? Download and start analyzing! ⚡**
         draft: false
         prerelease: false
+        generate_release_notes: false
         files: |
           executables/**/PokemonTypeClash-win-x64.zip
           executables/**/PokemonTypeClash-osx-x64.tar.gz
