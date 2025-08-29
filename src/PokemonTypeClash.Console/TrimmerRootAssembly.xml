@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<linker>
+  <assembly fullname="PokemonTypeClash.Infrastructure" preserve="all" />
+  <assembly fullname="PokemonTypeClash.Application" preserve="all" />
+  <assembly fullname="PokemonTypeClash.Core" preserve="all" />
+  
+  <!-- Preserve JSON serialization types -->
+  <assembly fullname="System.Text.Json" preserve="all" />
+  
+  <!-- Preserve configuration binding types -->
+  <assembly fullname="Microsoft.Extensions.Configuration" preserve="all" />
+  <assembly fullname="Microsoft.Extensions.Configuration.Binder" preserve="all" />
+  <assembly fullname="Microsoft.Extensions.DependencyInjection" preserve="all" />
+  <assembly fullname="Microsoft.Extensions.Options.ConfigurationExtensions" preserve="all" />
+  
+  <!-- Preserve HTTP client types -->
+  <assembly fullname="System.Net.Http" preserve="all" />
+  <assembly fullname="System.Net.Http.Json" preserve="all" />
+</linker>

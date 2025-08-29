@@ -159,7 +159,7 @@ jobs:
     - name: Set executable permissions (Linux/macOS)
       run: |
         if [ "${{ matrix.platform }}" != "win-x64" ]; then
-          chmod +x ./publish/${{ matrix.platform }}/PokemonTypeClash
+          chmod +x ./publish/${{ matrix.platform }}/PokemonTypeClash.Console
           echo "✅ Set executable permissions for ${{ matrix.platform }}"
         else
           echo "⏭️ Skipping permissions for Windows"
@@ -232,25 +232,25 @@ jobs:
           
           **Windows Users:**
           - Download `PokemonTypeClash-win-x64.zip`
-          - Extract and run `PokemonTypeClash.exe`
+          - Extract and run `PokemonTypeClash.Console.exe`
           - No .NET installation required!
           
           **macOS Intel Users:**
           - Download `PokemonTypeClash-osx-x64.tar.gz`
           - Extract: `tar -xzf PokemonTypeClash-osx-x64.tar.gz`
-          - Run: `./PokemonTypeClash`
+          - Run: `./PokemonTypeClash.Console`
           - No .NET installation required!
           
           **macOS Apple Silicon (M1/M2) Users:**
           - Download `PokemonTypeClash-osx-arm64.tar.gz`
           - Extract: `tar -xzf PokemonTypeClash-osx-arm64.tar.gz`
-          - Run: `./PokemonTypeClash`
+          - Run: `./PokemonTypeClash.Console`
           - Native ARM64 performance!
           
           **Linux Users:**
           - Download `PokemonTypeClash-linux-x64.tar.gz`
           - Extract: `tar -xzf PokemonTypeClash-linux-x64.tar.gz`
-          - Run: `./PokemonTypeClash`
+          - Run: `./PokemonTypeClash.Console`
           - No .NET installation required!
           
           ### Quick Start

@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -20,6 +21,7 @@ public static class ServiceCollectionExtensions
     /// <param name="services">The service collection</param>
     /// <param name="configuration">The configuration</param>
     /// <returns>The service collection</returns>
+    [RequiresUnreferencedCode("Configuration binding and dependency injection might require types that cannot be statically analyzed.")]
     public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
         // Configure PokeAPI settings

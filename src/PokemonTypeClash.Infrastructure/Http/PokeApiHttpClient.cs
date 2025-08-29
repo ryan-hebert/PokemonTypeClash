@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using System.Text.Json;
 using Microsoft.Extensions.Logging;
@@ -7,7 +8,7 @@ using PokemonTypeClash.Infrastructure.Configuration;
 namespace PokemonTypeClash.Infrastructure.Http;
 
 /// <summary>
-/// HTTP client wrapper for communicating with the PokéAPI
+/// HTTP client wrapper for making requests to the PokéAPI
 /// </summary>
 public class PokeApiHttpClient : IPokeApiHttpClient
 {
@@ -37,6 +38,7 @@ public class PokeApiHttpClient : IPokeApiHttpClient
     /// <typeparam name="T">The type to deserialize the response to</typeparam>
     /// <param name="endpoint">The API endpoint to call</param>
     /// <returns>The deserialized response</returns>
+    [RequiresUnreferencedCode("JSON serialization and deserialization might require types that cannot be statically analyzed.")]
     public async Task<T> GetAsync<T>(string endpoint)
     {
         // Use relative URL since BaseAddress is configured on HttpClient

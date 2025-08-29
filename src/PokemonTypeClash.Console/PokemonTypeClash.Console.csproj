@@ -19,6 +19,21 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    
+    <!-- Suppress trim warnings for known safe operations -->
+    <SuppressTrimAnalysisWarnings>true</SuppressTrimAnalysisWarnings>
+    
+    <!-- Enable trim analysis but suppress warnings -->
+    <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
+    <TrimAnalysisWarningsAsErrors>false</TrimAnalysisWarningsAsErrors>
   </PropertyGroup>
+
+  <!-- Trim configuration -->
+  <ItemGroup>
+    <TrimmerRootAssembly Include="PokemonTypeClash.Infrastructure" />
+    <TrimmerRootAssembly Include="PokemonTypeClash.Application" />
+    <TrimmerRootAssembly Include="PokemonTypeClash.Core" />
+    <TrimmerRootDescriptor Include="TrimmerRootAssembly.xml" />
+  </ItemGroup>
 
 </Project>

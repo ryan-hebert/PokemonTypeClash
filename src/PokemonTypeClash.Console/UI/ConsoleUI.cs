@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using PokemonTypeClash.Core.Interfaces;
 using PokemonTypeClash.Core.Models;
 
@@ -587,6 +588,7 @@ public class ConsoleUI : IConsoleUI
     /// <summary>
     /// Runs the main application loop
     /// </summary>
+    [RequiresUnreferencedCode("JSON serialization and deserialization might require types that cannot be statically analyzed.")]
     public async Task RunAsync()
     {
         bool continueRunning = true;
@@ -628,6 +630,7 @@ public class ConsoleUI : IConsoleUI
     /// <summary>
     /// Analyzes a Pokemon based on user input
     /// </summary>
+    [RequiresUnreferencedCode("JSON serialization and deserialization might require types that cannot be statically analyzed.")]
     private async Task AnalyzePokemonAsync()
     {
         bool continueAnalyzing = true;
@@ -838,6 +841,7 @@ public class ConsoleUI : IConsoleUI
     /// Runs a Pokemon analysis without interactive prompts (for CI/testing)
     /// </summary>
     /// <param name="pokemonName">The name or ID of the Pokemon to analyze</param>
+    [RequiresUnreferencedCode("JSON serialization and deserialization might require types that cannot be statically analyzed.")]
     public async Task RunAnalysisAsync(string pokemonName)
     {
         try
