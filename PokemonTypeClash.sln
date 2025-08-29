@@ -1,0 +1,85 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{19B2BC03-93B4-431A-9FAB-71075CC2C737}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokemonTypeClash.Core", "src\PokemonTypeClash.Core\PokemonTypeClash.Core.csproj", "{72D27EB4-1D6B-4484-BE9D-6264FAF48F4E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokemonTypeClash.Infrastructure", "src\PokemonTypeClash.Infrastructure\PokemonTypeClash.Infrastructure.csproj", "{3B846AFE-D2D7-45D4-8E86-1676A76E620D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokemonTypeClash.Application", "src\PokemonTypeClash.Application\PokemonTypeClash.Application.csproj", "{C07DF539-00E5-4108-B4C0-69C0A601923C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokemonTypeClash.Console", "src\PokemonTypeClash.Console\PokemonTypeClash.Console.csproj", "{9FA08AB2-ACD0-4251-8E61-95967952BC2D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{5D53972E-C967-4578-B22E-5DF6DB493288}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokemonTypeClash.Core.Tests", "tests\PokemonTypeClash.Core.Tests\PokemonTypeClash.Core.Tests.csproj", "{8FB53EBD-0D84-4443-9CF0-59CA7F4500A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokemonTypeClash.Infrastructure.Tests", "tests\PokemonTypeClash.Infrastructure.Tests\PokemonTypeClash.Infrastructure.Tests.csproj", "{AB0A7C06-5758-47ED-A12E-B857059129D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokemonTypeClash.Application.Tests", "tests\PokemonTypeClash.Application.Tests\PokemonTypeClash.Application.Tests.csproj", "{444F42D0-F760-49E1-B48E-5C47F43CC696}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokemonTypeClash.Console.Tests", "tests\PokemonTypeClash.Console.Tests\PokemonTypeClash.Console.Tests.csproj", "{F96075F5-A205-456A-B10B-9DF3794555CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokemonTypeClash.Performance.Tests", "tests\PokemonTypeClash.Performance.Tests\PokemonTypeClash.Performance.Tests.csproj", "{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{72D27EB4-1D6B-4484-BE9D-6264FAF48F4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72D27EB4-1D6B-4484-BE9D-6264FAF48F4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72D27EB4-1D6B-4484-BE9D-6264FAF48F4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72D27EB4-1D6B-4484-BE9D-6264FAF48F4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B846AFE-D2D7-45D4-8E86-1676A76E620D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B846AFE-D2D7-45D4-8E86-1676A76E620D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B846AFE-D2D7-45D4-8E86-1676A76E620D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B846AFE-D2D7-45D4-8E86-1676A76E620D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C07DF539-00E5-4108-B4C0-69C0A601923C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C07DF539-00E5-4108-B4C0-69C0A601923C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C07DF539-00E5-4108-B4C0-69C0A601923C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C07DF539-00E5-4108-B4C0-69C0A601923C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FA08AB2-ACD0-4251-8E61-95967952BC2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FA08AB2-ACD0-4251-8E61-95967952BC2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FA08AB2-ACD0-4251-8E61-95967952BC2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FA08AB2-ACD0-4251-8E61-95967952BC2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FB53EBD-0D84-4443-9CF0-59CA7F4500A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FB53EBD-0D84-4443-9CF0-59CA7F4500A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FB53EBD-0D84-4443-9CF0-59CA7F4500A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FB53EBD-0D84-4443-9CF0-59CA7F4500A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB0A7C06-5758-47ED-A12E-B857059129D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB0A7C06-5758-47ED-A12E-B857059129D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB0A7C06-5758-47ED-A12E-B857059129D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB0A7C06-5758-47ED-A12E-B857059129D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{444F42D0-F760-49E1-B48E-5C47F43CC696}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{444F42D0-F760-49E1-B48E-5C47F43CC696}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{444F42D0-F760-49E1-B48E-5C47F43CC696}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{444F42D0-F760-49E1-B48E-5C47F43CC696}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F96075F5-A205-456A-B10B-9DF3794555CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F96075F5-A205-456A-B10B-9DF3794555CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F96075F5-A205-456A-B10B-9DF3794555CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F96075F5-A205-456A-B10B-9DF3794555CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{72D27EB4-1D6B-4484-BE9D-6264FAF48F4E} = {19B2BC03-93B4-431A-9FAB-71075CC2C737}
+		{3B846AFE-D2D7-45D4-8E86-1676A76E620D} = {19B2BC03-93B4-431A-9FAB-71075CC2C737}
+		{C07DF539-00E5-4108-B4C0-69C0A601923C} = {19B2BC03-93B4-431A-9FAB-71075CC2C737}
+		{9FA08AB2-ACD0-4251-8E61-95967952BC2D} = {19B2BC03-93B4-431A-9FAB-71075CC2C737}
+		{8FB53EBD-0D84-4443-9CF0-59CA7F4500A5} = {5D53972E-C967-4578-B22E-5DF6DB493288}
+		{AB0A7C06-5758-47ED-A12E-B857059129D9} = {5D53972E-C967-4578-B22E-5DF6DB493288}
+		{444F42D0-F760-49E1-B48E-5C47F43CC696} = {5D53972E-C967-4578-B22E-5DF6DB493288}
+		{F96075F5-A205-456A-B10B-9DF3794555CC} = {5D53972E-C967-4578-B22E-5DF6DB493288}
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890} = {5D53972E-C967-4578-B22E-5DF6DB493288}
+	EndGlobalSection
+EndGlobal
