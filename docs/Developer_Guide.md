@@ -43,7 +43,7 @@ This guide provides comprehensive information for developers contributing to the
 
 2. **Clone the Repository**
    ```bash
-   git clone https://github.com/yourusername/PokemonTypeClash.git
+   git clone https://github.com/ryan-hebert/PokemonTypeClash.git
    cd PokemonTypeClash
    ```
 
@@ -285,6 +285,21 @@ public async Task<Pokemon> GetPokemonAsync(string name)
 }
 ```
 
+### Trim Analysis Support
+
+#### RequiresUnreferencedCode Attribute
+For methods that use reflection or dynamic code generation:
+
+```csharp
+using System.Diagnostics.CodeAnalysis;
+
+[RequiresUnreferencedCode("JSON serialization requires types that cannot be statically analyzed")]
+public async Task<Pokemon> GetPokemonAsync(string name)
+{
+    // Implementation using JSON serialization
+}
+```
+
 ## Testing Guidelines
 
 ### Test Structure
@@ -302,8 +317,10 @@ tests/
 │   ├── Services/
 │   ├── Mappers/
 │   └── Integration/
-└── PokemonTypeClash.Console.Tests/
-    └── UI/
+├── PokemonTypeClash.Console.Tests/
+│   └── UI/
+└── PokemonTypeClash.Performance.Tests/
+    └── Benchmarks/
 ```
 
 #### Test Naming Convention
@@ -366,6 +383,19 @@ public async Task GetPokemonAsync_WithRealApi_ReturnsValidPokemon()
     result.Should().NotBeNull();
     result.Name.Should().Be("pikachu");
     result.Types.Should().ContainSingle();
+}
+```
+
+#### Performance Tests
+- **Purpose**: Measure application performance
+- **Dependencies**: BenchmarkDotNet
+- **Execution**: Performance benchmarking
+
+```csharp
+[Benchmark]
+public async Task GetPokemonAsync_Benchmark()
+{
+    await _service.GetPokemonAsync("pikachu");
 }
 ```
 
@@ -577,6 +607,15 @@ dotnet run --project src/PokemonTypeClash.Console --verbosity normal
 cat appsettings.json
 ```
 
+#### macOS Security Issues
+```bash
+# Remove quarantine attribute
+xattr -d com.apple.quarantine /path/to/PokemonTypeClash.Console
+
+# Set executable permissions
+chmod +x PokemonTypeClash.Console
+```
+
 ### Debugging Techniques
 
 #### Using Debugger
@@ -631,6 +670,11 @@ public class PokemonService
 - Use connection pooling
 - Implement retry policies with exponential backoff
 
+### Trim Analysis
+- Use `[RequiresUnreferencedCode]` for reflection-based code
+- Configure `TrimmerRootAssembly.xml` for complex scenarios
+- Test trimmed builds thoroughly
+
 ## Deployment
 
 ### Local Development
@@ -640,24 +684,33 @@ dotnet run --project src/PokemonTypeClash.Console
 
 # Run with specific configuration
 dotnet run --project src/PokemonTypeClash.Console --environment Development
+
+# Run with command-line arguments
+dotnet run --project src/PokemonTypeClash.Console -- --help
 ```
 
 ### Production Build
 ```bash
-# Publish for production
-dotnet publish src/PokemonTypeClash.Console -c Release -o ./publish
+# Publish for production (single-file, self-contained)
+dotnet publish src/PokemonTypeClash.Console -c Release -o ./publish --self-contained -r osx-arm64 -p:PublishSingleFile=true
 
 # Run published application
 ./publish/PokemonTypeClash.Console
 ```
 
-### Docker Deployment
+### Cross-Platform Builds
 ```bash
-# Build Docker image
-docker build -t pokemontypeclash .
+# Windows
+dotnet publish src/PokemonTypeClash.Console -c Release -o ./publish/win-x64 --self-contained -r win-x64 -p:PublishSingleFile=true
 
-# Run container
-docker run -it pokemontypeclash
+# Linux
+dotnet publish src/PokemonTypeClash.Console -c Release -o ./publish/linux-x64 --self-contained -r linux-x64 -p:PublishSingleFile=true
+
+# macOS Intel
+dotnet publish src/PokemonTypeClash.Console -c Release -o ./publish/osx-x64 --self-contained -r osx-x64 -p:PublishSingleFile=true
+
+# macOS ARM64
+dotnet publish src/PokemonTypeClash.Console -c Release -o ./publish/osx-arm64 --self-contained -r osx-arm64 -p:PublishSingleFile=true
 ```
 
 ## Contributing Guidelines
@@ -668,6 +721,7 @@ docker run -it pokemontypeclash
 - [ ] New features have tests
 - [ ] Documentation is updated
 - [ ] No breaking changes (unless documented)
+- [ ] Trim analysis warnings addressed
 
 ### Commit Message Format
 ```
@@ -710,11 +764,18 @@ docs(readme): update installation instructions
 - [.NET 9 Documentation](https://docs.microsoft.com/en-us/dotnet/)
 - [C# Programming Guide](https://docs.microsoft.com/en-us/dotnet/csharp/)
 - [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
+- [Trim Analysis](https://docs.microsoft.com/en-us/dotnet/core/deploying/trimming/)
 
 ### Tools
 - [xUnit Testing Framework](https://xunit.net/)
 - [Moq Mocking Library](https://github.com/moq/moq4)
 - [FluentAssertions](https://fluentassertions.com/)
+- [BenchmarkDotNet](https://benchmarkdotnet.org/)
 
 ### External APIs
 - [PokéAPI Documentation](https://pokeapi.co/docs/v2)
+
+### Project Links
+- [GitHub Repository](https://github.com/ryan-hebert/PokemonTypeClash)
+- [Issues](https://github.com/ryan-hebert/PokemonTypeClash/issues)
+- [Releases](https://github.com/ryan-hebert/PokemonTypeClash/releases)

@@ -182,6 +182,8 @@ public interface IConsoleUI
     void ShowError(string message);
     void ShowLoadingMessage(string message);
     void ClearScreen();
+    Task RunAnalysisAsync(string pokemonName);
+    bool IsCommandLineMode { get; set; }
 }
 ```
 
@@ -192,6 +194,8 @@ public interface IConsoleUI
 - `ShowError(string message)`: Displays error messages
 - `ShowLoadingMessage(string message)`: Shows loading/processing messages
 - `ClearScreen()`: Clears the console screen
+- `RunAnalysisAsync(string pokemonName)`: Performs non-interactive analysis
+- `IsCommandLineMode`: Flag to disable interactive prompts for CI/CD
 
 ## External API Integration
 
@@ -314,6 +318,30 @@ public class PokemonNotFoundException : Exception
 - `MaxRetries`: Maximum retry attempts for failed requests
 - `CacheDurationMinutes`: Type data cache duration
 
+## Command-Line Interface
+
+### Interactive Mode
+The application runs in interactive mode by default, providing a menu-driven interface.
+
+### Command-Line Mode
+The application supports command-line arguments for non-interactive operation:
+
+```bash
+# Get help
+./PokemonTypeClash.Console --help
+
+# Get version
+./PokemonTypeClash.Console --version
+
+# Analyze specific Pokemon
+./PokemonTypeClash.Console --analyze pikachu
+```
+
+**Command-Line Arguments:**
+- `--help`: Display help information
+- `--version`: Display version information
+- `--analyze <pokemon-name>`: Analyze specific Pokemon and exit
+
 ## Usage Examples
 
 ### Basic Pokémon Analysis
@@ -355,6 +383,15 @@ catch (PokemonApiException ex)
 }
 ```
 
+### Command-Line Integration
+```csharp
+// Set command-line mode to disable interactive prompts
+consoleUI.IsCommandLineMode = true;
+
+// Run analysis without user interaction
+await consoleUI.RunAnalysisAsync("pikachu");
+```
+
 ## Performance Considerations
 
 ### Caching
@@ -372,6 +409,12 @@ catch (PokemonApiException ex)
 - Type data cache can grow to ~2MB with all types loaded
 - Pokémon data is not persisted between requests
 
+### Trim Analysis
+- Application uses .NET trimming for smaller executable sizes
+- `[RequiresUnreferencedCode]` attributes added to reflection-based methods
+- `TrimmerRootAssembly.xml` configured for complex scenarios
+- Trimmed builds tested for functionality
+
 ## Testing
 
 ### Unit Tests
@@ -387,9 +430,17 @@ Integration tests verify:
 - Error handling with actual API responses
 - End-to-end functionality
 
+### Performance Tests
+Performance tests measure:
+- API response times
+- Memory usage patterns
+- CPU utilization
+- Benchmark comparisons
+
 ### Test Categories
 - `[Fact]`: Unit tests (no external dependencies)
 - `[Fact, Category("Integration")]`: Integration tests (external API calls)
+- `[Benchmark]`: Performance tests (BenchmarkDotNet)
 
 Run tests with:
 ```bash
@@ -398,4 +449,48 @@ dotnet test --filter "Category!=Integration"
 
 # All tests including integration
 dotnet test
+
+# Performance tests only
+dotnet test tests/PokemonTypeClash.Performance.Tests
 ```
+
+## Deployment
+
+### Self-Contained Executables
+The application is distributed as single-file, self-contained executables:
+
+```bash
+# Build for current platform
+dotnet publish src/PokemonTypeClash.Console -c Release -o ./publish --self-contained -p:PublishSingleFile=true
+
+# Build for specific platforms
+dotnet publish src/PokemonTypeClash.Console -c Release -o ./publish/win-x64 --self-contained -r win-x64 -p:PublishSingleFile=true
+dotnet publish src/PokemonTypeClash.Console -c Release -o ./publish/osx-arm64 --self-contained -r osx-arm64 -p:PublishSingleFile=true
+dotnet publish src/PokemonTypeClash.Console -c Release -o ./publish/linux-x64 --self-contained -r linux-x64 -p:PublishSingleFile=true
+```
+
+### Cross-Platform Support
+- **Windows**: `PokemonTypeClash.Console.exe`
+- **macOS Intel**: `PokemonTypeClash.Console` (x64)
+- **macOS ARM64**: `PokemonTypeClash.Console` (Apple Silicon)
+- **Linux**: `PokemonTypeClash.Console` (x64)
+
+### Security Considerations
+- Executables are properly signed and have correct permissions
+- macOS quarantine attributes are handled in documentation
+- No external dependencies required for end users
+
+## Resources
+
+### Documentation
+- [Project README](https://github.com/ryan-hebert/PokemonTypeClash/blob/main/README.md)
+- [Developer Guide](https://github.com/ryan-hebert/PokemonTypeClash/blob/main/docs/Developer_Guide.md)
+- [Deployment Guide](https://github.com/ryan-hebert/PokemonTypeClash/blob/main/docs/Deployment_Guide.md)
+
+### External APIs
+- [PokéAPI Documentation](https://pokeapi.co/docs/v2)
+
+### Project Links
+- [GitHub Repository](https://github.com/ryan-hebert/PokemonTypeClash)
+- [Issues](https://github.com/ryan-hebert/PokemonTypeClash/issues)
+- [Releases](https://github.com/ryan-hebert/PokemonTypeClash/releases)
