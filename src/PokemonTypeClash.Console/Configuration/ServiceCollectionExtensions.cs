@@ -29,8 +29,14 @@ public static class ServiceCollectionExtensions
         // Add Application services
         services.AddApplicationServices();
         
-        // Add Console services
-        services.AddScoped<IConsoleUI, ConsoleUI>();
+        // Add Console services with Spectre.Console UI
+        services.AddSingleton<IConsoleUI>(provider =>
+        {
+            return new SpectreConsoleUI(
+                provider.GetRequiredService<ITypeEffectivenessService>(),
+                provider.GetRequiredService<IPokemonApiService>()
+            );
+        });
         
         return services;
     }
