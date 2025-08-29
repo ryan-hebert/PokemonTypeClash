@@ -1,161 +1,179 @@
-# PokemonTypeClash 
+# PokemonTypeClash 🎮
 
 A fun console game that analyzes Pokémon type effectiveness! Enter any Pokémon name and see their strengths, weaknesses, and battle strategies with authentic Pokemon-themed styling.
 
-## Quick Start - Play in 3 Steps!
+## 🚀 Quick Start - Play in 3 Steps!
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/yourusername/PokemonTypeClash.git
+git clone https://github.com/ryan-hebert/PokemonTypeClash.git
 cd PokemonTypeClash
 ```
 
 ### 2. Run the Game
+
+**On Windows:**
+```cmd
+run.bat
+```
+
+**On macOS/Linux:**
 ```bash
 ./run.sh
 ```
 
-### 3. Start Playing!
+**Alternative (any platform):**
+```bash
+dotnet run --project src/PokemonTypeClash.Console
+```
+
+### 3. Start Playing! 🎮
 - Use arrow keys or number keys to navigate
 - Choose "Analyze Pokemon Type Effectiveness"
 - Enter any Pokemon name (like "pikachu", "charizard", "mewtwo")
 - View detailed battle analysis!
 
-## What You'll See
+## 🎯 What You'll See
 
 The game provides comprehensive Pokemon battle analysis including:
 
 - **⚔️ Offensive Capabilities**: What types your Pokemon is strong against
-- **🛡️ Defensive Capabilities**: What types your Pokemon is resistant to
-- **⚠️ Weaknesses**: What types to watch out for
-- **🎨 Pokemon-Themed UI**: Authentic colors and styling
+- **🛡️ Defensive Weaknesses**: What types can exploit your Pokemon
+- **💪 Resistances**: What attacks your Pokemon can shrug off
+- **🚫 Immunities**: What attacks have no effect on your Pokemon
+- **📊 Damage Multipliers**: Exact effectiveness calculations
 
-## Example Gameplay
+## 🖥️ System Requirements
 
-```
-Enter Pokemon name or ID: pikachu
+- **.NET 9.0 SDK** - [Download here](https://dotnet.microsoft.com/download)
+- **Windows 10/11, macOS 10.15+, or Linux**
+- **4GB RAM** (minimum)
+- **Internet connection** (for Pokemon data)
 
-🐶 PIKACHU
-⚡ Types: Electric
+## 🔧 Installation Troubleshooting
 
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                           TYPE EFFECTIVENESS TABLE                          │
-├─────────────────────────────────────────────────────────────────────────────┤
-│  OFFENSIVE CAPABILITIES                                                     │
-├─────────────────────────────────────────────────────────────────────────────┤
-│  ⚔️  Strong Against: Water, Flying                                          │
-│  ⚠️  Weak Against:   Electric, Grass                                        │
-│  ❌ No Effect:      Ground                                                  │
-├─────────────────────────────────────────────────────────────────────────────┤
-│   DEFENSIVE CAPABILITIES                                                    │
-├─────────────────────────────────────────────────────────────────────────────┤
-│  🛡️  Resistant To:  Flying, Steel, Electric                                │
-│  ⚠️  Vulnerable To: Ground                                                  │
-└─────────────────────────────────────────────────────────────────────────────┘
+### Windows Users
+If you get a bash error, use the Windows batch file:
+```cmd
+run.bat
 ```
 
-##  Requirements
+**If you don't have .NET installed:**
+1. Download .NET 9.0 SDK from [Microsoft](https://dotnet.microsoft.com/download)
+2. Run the installer
+3. Restart your command prompt
+4. Try `run.bat` again
 
-- **.NET 9.0 SDK** - [Download here](https://dotnet.microsoft.com/download/dotnet/9.0)
-- **Git** - [Download here](https://git-scm.com/downloads)
-
-## Alternative Ways to Run
-
-### Option 1: Direct .NET Commands
-```bash
-dotnet run --project src/PokemonTypeClash.Console
-```
-
-### Option 2: Build Then Run
-```bash
-dotnet build
-dotnet run --project src/PokemonTypeClash.Console
-```
-
-### Option 3: Use the Launcher Script
+### macOS/Linux Users
+Make sure the script is executable:
 ```bash
 chmod +x run.sh
 ./run.sh
 ```
 
-## Game Features
-
-- **Real Pokemon Data**: Uses the official PokéAPI
-- **All Pokemon Supported**: Any Pokemon name or ID works
-- **Dual-Type Support**: Handles Pokemon with multiple types
-- **Interactive Menu**: Arrow key navigation with visual feedback
-- **Pokemon-Themed UI**: Authentic colors and styling
-- **Network Compatible**: Works on any network configuration
-
-## How to Play
-
-1. **Launch the game** using `./run.sh`
-2. **Navigate the menu** with arrow keys or number keys
-3. **Choose "Analyze Pokemon Type Effectiveness"**
-4. **Enter a Pokemon name** (examples: "pikachu", "charizard", "mewtwo", "25", "6")
-5. **View the analysis** and learn battle strategies!
-6. **Try another Pokemon** or explore other menu options
-
-## Menu Options
-
-- **⚡ Analyze Pokemon Type Effectiveness** - Main game feature
-- **📊 View All Pokemon Types** - See all 18 Pokemon types
-- **❓ Help & Examples** - Learn how to play
-- **🚪 Exit** - Close the game
-
-## Troubleshooting
-
-### "Command not found: dotnet"
-- Install .NET 9.0 SDK from [Microsoft's website](https://dotnet.microsoft.com/download/dotnet/9.0)
-
-### "Permission denied" on run.sh
+### All Platforms
+If you have issues, try the direct .NET command:
 ```bash
-chmod +x run.sh
+dotnet run --project src/PokemonTypeClash.Console
 ```
 
-### Network issues
-- The game automatically handles network compatibility
-- Works on corporate networks, VPNs, and firewalls
+## 🎮 Example Gameplay
 
-### Pokemon not found
-- Try the Pokemon's ID number instead of name
-- Check spelling (names are case-insensitive)
-- Examples: "pikachu" (ID: 25), "charizard" (ID: 6)
+```
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                              PokemonTypeClash                                ║
+╚══════════════════════════════════════════════════════════════════════════════╝
 
-## Tips for Players
+  🐶 PIKACHU
 
-- **Use Pokemon IDs**: If a name doesn't work, try the ID number
-- **Explore Dual Types**: Try Pokemon like "charizard" (Fire/Flying) or "venusaur" (Grass/Poison)
-- **Learn Type Matchups**: Use the "View All Pokemon Types" option to study
-- **Experiment**: Try different Pokemon to understand type relationships
+  ⚡ Types: Electric
 
-## For Developers
+  ┌─────────────────────────────────────────────────────────────────────────────┐
+  │  ⚔️  Strong Against: Water, Flying                                          │
+  │  🛡️  Weak Against: Ground, Grass, Dragon                                   │
+  │  💪 Resistant To: Electric, Flying, Steel                                  │
+  │  🚫 Immune To: None                                                        │
+  │  📊 Vulnerable To: Ground                                                  │
+  └─────────────────────────────────────────────────────────────────────────────┘
+```
 
-### Running Tests
+## 🎯 Tips for Players
+
+- **Type names are case-insensitive**: "Pikachu", "pikachu", or "PIKACHU" all work
+- **Use Pokemon names or numbers**: Try "25" instead of "pikachu"
+- **Explore different Pokemon**: Each has unique type combinations
+- **Study the effectiveness**: Learn which types counter others
+- **Use the help menu**: Press "3" for examples and tips
+
+## 🏗️ For Developers
+
+### Build and Test
 ```bash
+# Build the solution
+dotnet build
+
+# Run all tests
 dotnet test
+
+# Run specific test project
+dotnet test tests/PokemonTypeClash.Core.Tests
 ```
 
 ### Project Structure
 ```
-PokemonTypeClash/
-├── src/                    # Source code
-│   ├── PokemonTypeClash.Core/           # Domain models
-│   ├── PokemonTypeClash.Infrastructure/ # API integration
-│   ├── PokemonTypeClash.Application/    # Business logic
-│   └── PokemonTypeClash.Console/        # Game UI
-├── tests/                  # Test projects
-├── run.sh                  # Game launcher
-└── README.md              # This file
+src/
+├── PokemonTypeClash.Core/          # Domain models and interfaces
+├── PokemonTypeClash.Application/   # Business logic and services
+├── PokemonTypeClash.Infrastructure/# API clients and data access
+└── PokemonTypeClash.Console/       # User interface
+
+tests/
+├── PokemonTypeClash.Core.Tests/
+├── PokemonTypeClash.Application.Tests/
+├── PokemonTypeClash.Infrastructure.Tests/
+├── PokemonTypeClash.Console.Tests/
+└── PokemonTypeClash.Performance.Tests/
 ```
 
+## 🐛 Troubleshooting
 
-## Acknowledgments
+### Common Issues
 
-- **PokéAPI** for providing Pokemon data
-- **The Pokemon Company** for the Pokemon franchise
-- **.NET community** for tooling
+**"Command not found: dotnet"**
+- Install .NET 9.0 SDK from [Microsoft](https://dotnet.microsoft.com/download)
+
+**"Permission denied" on run.sh**
+- Run: `chmod +x run.sh`
+
+**"No such file or directory" on Windows**
+- Use `run.bat` instead of `run.sh`
+
+**API errors or timeouts**
+- Check your internet connection
+- The app will retry automatically
+
+**Build errors**
+- Make sure you have .NET 9.0 SDK installed
+- Try: `dotnet clean && dotnet build`
+
+## 📚 Learn More
+
+- [Pokemon Type Chart](https://pokemondb.net/type)
+- [PokéAPI Documentation](https://pokeapi.co/docs/v2)
+- [.NET Documentation](https://docs.microsoft.com/dotnet/)
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests for new functionality
+5. Submit a pull request
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
 
 ---
 
-**Ready to become a Pokemon master? Clone the repo and start analyzing!** 
+**Ready to become a Pokemon master? Start analyzing types now! ⚡** 
