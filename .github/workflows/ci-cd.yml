@@ -132,92 +132,17 @@ jobs:
           performance-report.md
         retention-days: 30
 
-  # Build Executables Job
-  build-executables:
-    name: Build Cross-Platform Executables
-    runs-on: ubuntu-latest
-    needs: [build-and-test]
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    
-    strategy:
-      matrix:
-        platform: [win-x64, linux-x64, osx-x64, osx-arm64]
-    
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: ${{ env.DOTNET_VERSION }}
-        
-    - name: Build single-file executable
-      run: |
-        dotnet publish src/PokemonTypeClash.Console \
-          -c Release \
-          -o ./publish/${{ matrix.platform }} \
-          --self-contained \
-          -r ${{ matrix.platform }} \
-          -p:PublishSingleFile=true \
-          -p:PublishTrimmed=true \
-          --verbosity minimal
-        
-    - name: Set executable permissions (Linux/macOS)
-      run: |
-        if [ "${{ matrix.platform }}" != "win-x64" ]; then
-          chmod +x ./publish/${{ matrix.platform }}/PokemonTypeClash.Console
-          echo "✅ Set executable permissions for ${{ matrix.platform }}"
-        else
-          echo "⏭️ Skipping permissions for Windows"
-        fi
-        
-    - name: Create archive
-      run: |
-        cd publish
-        
-        # Create archive based on platform
-        if [ "${{ matrix.platform }}" = "win-x64" ]; then
-          zip -r PokemonTypeClash-${{ matrix.platform }}.zip ${{ matrix.platform }}/
-        else
-          tar -czf PokemonTypeClash-${{ matrix.platform }}.tar.gz ${{ matrix.platform }}/
-        fi
-        
-    - name: Upload executable artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: PokemonTypeClash-${{ matrix.platform }}-${{ github.run_number }}
-        path: publish/PokemonTypeClash-${{ matrix.platform }}.*
-        retention-days: 30
-
   # Release Job
   release:
     name: Create Release
     runs-on: ubuntu-latest
-    needs: [build-executables]
+    needs: [build-and-test]
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
       
-    - name: Download all executable artifacts
-      uses: actions/download-artifact@v4
-      with:
-        path: ./executables
-        
-    - name: List downloaded files
-      run: |
-        echo "## Downloaded Artifacts" > release-assets.md
-        echo "" >> release-assets.md
-        echo "### Single-File Executables" >> release-assets.md
-        find ./executables -type f -name "*.zip" -o -name "*.tar.gz" | sort >> release-assets.md
-        echo "" >> release-assets.md
-        echo "### File Sizes" >> release-assets.md
-        echo "\`\`\`" >> release-assets.md
-        find ./executables -type f -name "*.zip" -o -name "*.tar.gz" | xargs ls -lh >> release-assets.md
-        echo "\`\`\`" >> release-assets.md
-        
     - name: Create release
       uses: softprops/action-gh-release@v1
       with:
@@ -227,53 +152,20 @@ jobs:
           ## 🎮 PokemonTypeClash v${{ github.run_number }}
           
           ### What's New
-          - 🚀 **Single-file executables** - Clean, compact downloads (~50-80MB)
-          - 🍎 **macOS ARM64 support** - Native Apple Silicon performance
-          - 🎯 **Cross-platform support** - Windows, macOS (Intel/ARM), and Linux
           - ⚡ **Pokemon type effectiveness analysis** - Real-time data from PokéAPI
           - 🎨 **Authentic Pokemon styling** - Pikachu yellow and Pokemon Red/Blue colors
           - 🛡️ **Comprehensive testing** - 57 tests ensure quality
-          - 🔧 **Fixed permissions** - Linux/macOS executables ready to run
           - 🧹 **Clean builds** - Minimal trim warnings for professional output
-          
-          ### Downloads
-          
-          **Windows Users:**
-          - Download `PokemonTypeClash-win-x64.zip`
-          - Extract and run `PokemonTypeClash.Console.exe`
-          - No .NET installation required!
-          
-          **macOS Intel Users:**
-          - Download `PokemonTypeClash-osx-x64.tar.gz`
-          - Extract: `tar -xzf PokemonTypeClash-osx-x64.tar.gz`
-          - Run: `./PokemonTypeClash.Console`
-          - No .NET installation required!
-          
-          **macOS Apple Silicon (M1/M2) Users:**
-          - Download `PokemonTypeClash-osx-arm64.tar.gz`
-          - Extract: `tar -xzf PokemonTypeClash-osx-arm64.tar.gz`
-          - Run: `./PokemonTypeClash.Console`
-          - Native ARM64 performance!
-          
-          **Linux Users:**
-          - Download `PokemonTypeClash-linux-x64.tar.gz`
-          - Extract: `tar -xzf PokemonTypeClash-linux-x64.tar.gz`
-          - Run: `./PokemonTypeClash.Console`
-          - No .NET installation required!
+          - 🔧 **Command-line mode** - Non-interactive operation for CI/CD
           
           ### Quick Start
           
-          **For Developers (with .NET):**
+          **For Developers:**
           ```bash
           git clone https://github.com/${{ github.repository }}.git
           cd PokemonTypeClash
           ./run.sh  # or run.bat on Windows
           ```
-          
-          **For End Users (no .NET needed):**
-          - Download the appropriate executable above
-          - Extract and run the executable
-          - That's it! No installation required.
           
           ### Features
           - ⚔️ **Offensive analysis** - What your Pokemon is strong against
@@ -283,32 +175,24 @@ jobs:
           - 📊 **Damage calculations** - Exact effectiveness multipliers
           
           ### System Requirements
+          - **.NET 9.0 SDK** - [Download here](https://dotnet.microsoft.com/download)
           - **Windows 10/11, macOS 10.15+, or Linux**
           - **4GB RAM** (minimum)
           - **Internet connection** (for Pokemon data)
-          - **No .NET installation required!**
           
           ### Technical Details
           - Built with .NET 9.0
-          - Self-contained executables include .NET runtime
-          - Single-file builds for cleaner distribution
-          - ARM64 support for Apple Silicon
           - Uses PokéAPI for real-time Pokemon data
           - Comprehensive error handling and retry logic
           - Cross-platform compatibility
-          - Proper executable permissions for Linux/macOS
           - Clean trim analysis with minimal warnings
+          - Command-line interface for automation
           
           ---
           
-          **Ready to become a Pokemon master? Download and start analyzing! ⚡**
+          **Ready to become a Pokemon master? Clone and start analyzing! ⚡**
         draft: false
         prerelease: false
         generate_release_notes: false
-        files: |
-          executables/**/PokemonTypeClash-win-x64.zip
-          executables/**/PokemonTypeClash-osx-x64.tar.gz
-          executables/**/PokemonTypeClash-osx-arm64.tar.gz
-          executables/**/PokemonTypeClash-linux-x64.tar.gz
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
