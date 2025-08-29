@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using PokemonTypeClash.Core.Models;
 
 namespace PokemonTypeClash.Core.Interfaces;
@@ -12,6 +13,7 @@ public interface IPokemonApiService
     /// </summary>
     /// <param name="nameOrId">The Pokemon name or ID</param>
     /// <returns>The Pokemon data</returns>
+    [RequiresUnreferencedCode("JSON serialization and deserialization might require types that cannot be statically analyzed.")]
     Task<Pokemon> GetPokemonAsync(string nameOrId);
     
     /// <summary>
@@ -19,5 +21,6 @@ public interface IPokemonApiService
     /// </summary>
     /// <param name="nameOrId">The type name or ID</param>
     /// <returns>The type data with effectiveness relationships</returns>
+    [RequiresUnreferencedCode("JSON serialization and deserialization might require types that cannot be statically analyzed.")]
     Task<PokemonType> GetTypeAsync(string nameOrId);
 }

@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using PokemonTypeClash.Core.Models;
 using PokemonTypeClash.Core.Enums;
 
@@ -13,6 +14,7 @@ public interface ITypeEffectivenessService
     /// </summary>
     /// <param name="pokemon">The Pokemon to analyze</param>
     /// <returns>The analysis result</returns>
+    [RequiresUnreferencedCode("JSON serialization and deserialization might require types that cannot be statically analyzed.")]
     Task<TypeAnalysisResult> AnalyzeTypeEffectivenessAsync(Pokemon pokemon);
     
     /// <summary>

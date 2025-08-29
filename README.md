@@ -184,7 +184,7 @@ tests/
 
 **"Permission denied" on downloaded executable**
 - The pre-built executables have proper permissions set
-- If you still get permission errors, run: `chmod +x PokemonTypeClash`
+- If you still get permission errors, run: `chmod +x PokemonTypeClash.Console`
 
 **API errors or timeouts**
 - Check your internet connection

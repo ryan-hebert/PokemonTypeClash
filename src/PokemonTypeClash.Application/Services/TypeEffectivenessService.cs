@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Logging;
 using PokemonTypeClash.Core.Enums;
+using System.Diagnostics.CodeAnalysis;
 using PokemonTypeClash.Core.Interfaces;
 using PokemonTypeClash.Core.Models;
 
@@ -24,6 +25,7 @@ public class TypeEffectivenessService : ITypeEffectivenessService
     /// </summary>
     /// <param name="pokemon">The Pokemon to analyze</param>
     /// <returns>The analysis result</returns>
+    [RequiresUnreferencedCode("JSON serialization and deserialization might require types that cannot be statically analyzed.")]
     public async Task<TypeAnalysisResult> AnalyzeTypeEffectivenessAsync(Pokemon pokemon)
     {
         _logger.LogInformation("Analyzing type effectiveness for Pokemon: {PokemonName}", pokemon.Name);
@@ -197,6 +199,7 @@ public class TypeEffectivenessService : ITypeEffectivenessService
     /// Gets all available Pokemon types for analysis
     /// </summary>
     /// <returns>List of all Pokemon types</returns>
+    [RequiresUnreferencedCode("JSON serialization and deserialization might require types that cannot be statically analyzed.")]
     private async Task<List<PokemonType>> GetAllPokemonTypesAsync()
     {
         return await _typeDataService.GetAllTypesAsync();

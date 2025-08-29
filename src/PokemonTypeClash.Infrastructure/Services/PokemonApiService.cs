@@ -1,18 +1,19 @@
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Logging;
-using PokemonTypeClash.Infrastructure.DTOs;
-using PokemonTypeClash.Infrastructure.Mappers;
 using PokemonTypeClash.Core.Interfaces;
 using PokemonTypeClash.Core.Models;
+using PokemonTypeClash.Infrastructure.DTOs;
 using PokemonTypeClash.Infrastructure.Http;
+using PokemonTypeClash.Infrastructure.Mappers;
 
 namespace PokemonTypeClash.Infrastructure.Services;
 
 /// <summary>
-/// Implementation of the PokéAPI service for retrieving Pokemon and type data
+/// Service for retrieving Pokemon data from the PokéAPI
 /// </summary>
 public class PokemonApiService : IPokemonApiService
 {
-    private readonly PokeApiHttpClient _httpClient;
+    private readonly IPokeApiHttpClient _httpClient;
     private readonly IPokemonMapper _pokemonMapper;
     private readonly ITypeMapper _typeMapper;
     private readonly ILogger<PokemonApiService> _logger;
@@ -20,7 +21,7 @@ public class PokemonApiService : IPokemonApiService
     private readonly ICacheService<PokemonType> _typeCache;
 
     public PokemonApiService(
-        PokeApiHttpClient httpClient,
+        IPokeApiHttpClient httpClient,
         IPokemonMapper pokemonMapper,
         ITypeMapper typeMapper,
         ILogger<PokemonApiService> logger,
@@ -40,6 +41,7 @@ public class PokemonApiService : IPokemonApiService
     /// </summary>
     /// <param name="nameOrId">The Pokemon name or ID</param>
     /// <returns>The Pokemon data</returns>
+    [RequiresUnreferencedCode("JSON serialization and deserialization might require types that cannot be statically analyzed.")]
     public async Task<Pokemon> GetPokemonAsync(string nameOrId)
     {
         var pokemonKey = nameOrId.ToLowerInvariant();
@@ -89,6 +91,7 @@ public class PokemonApiService : IPokemonApiService
     /// </summary>
     /// <param name="nameOrId">The type name or ID</param>
     /// <returns>The type data with effectiveness relationships</returns>
+    [RequiresUnreferencedCode("JSON serialization and deserialization might require types that cannot be statically analyzed.")]
     public async Task<PokemonType> GetTypeAsync(string nameOrId)
     {
         var typeKey = nameOrId.ToLowerInvariant();

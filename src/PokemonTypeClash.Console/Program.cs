@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System.Diagnostics.CodeAnalysis;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using PokemonTypeClash.Console.Configuration;
@@ -17,6 +18,7 @@ public class Program
     /// </summary>
     /// <param name="args">Command line arguments</param>
     /// <returns>Exit code</returns>
+    [RequiresUnreferencedCode("Configuration binding and dependency injection might require types that cannot be statically analyzed.")]
     public static async Task<int> Main(string[] args)
     {
         try

@@ -1,14 +1,15 @@
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Logging;
-using PokemonTypeClash.Infrastructure.DTOs;
-using PokemonTypeClash.Infrastructure.Mappers;
 using PokemonTypeClash.Core.Interfaces;
 using PokemonTypeClash.Core.Models;
+using PokemonTypeClash.Infrastructure.DTOs;
 using PokemonTypeClash.Infrastructure.Http;
+using PokemonTypeClash.Infrastructure.Mappers;
 
 namespace PokemonTypeClash.Infrastructure.Services;
 
 /// <summary>
-/// Service for retrieving Pokemon type data
+/// Service for retrieving Pokemon type data from the PokéAPI
 /// </summary>
 public class TypeDataService : ITypeDataService
 {
@@ -36,6 +37,7 @@ public class TypeDataService : ITypeDataService
     /// Retrieves all Pokemon types
     /// </summary>
     /// <returns>List of all Pokemon types</returns>
+    [RequiresUnreferencedCode("JSON serialization and deserialization might require types that cannot be statically analyzed.")]
     public async Task<List<PokemonType>> GetAllTypesAsync()
     {
         const string allTypesKey = "all_types";
@@ -97,6 +99,7 @@ public class TypeDataService : ITypeDataService
     /// </summary>
     /// <param name="nameOrId">The type name or ID</param>
     /// <returns>The type data with effectiveness relationships</returns>
+    [RequiresUnreferencedCode("JSON serialization and deserialization might require types that cannot be statically analyzed.")]
     public async Task<PokemonType> GetTypeAsync(string nameOrId)
     {
         var typeKey = nameOrId.ToLowerInvariant();
