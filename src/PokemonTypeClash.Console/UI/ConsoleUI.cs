@@ -818,4 +818,33 @@ public class ConsoleUI : IConsoleUI
         System.Console.ResetColor();
         System.Console.ReadKey();
     }
+
+    /// <summary>
+    /// Runs a Pokemon analysis without interactive prompts (for CI/testing)
+    /// </summary>
+    /// <param name="pokemonName">The name or ID of the Pokemon to analyze</param>
+    public async Task RunAnalysisAsync(string pokemonName)
+    {
+        try
+        {
+            if (string.IsNullOrWhiteSpace(pokemonName))
+            {
+                System.Console.WriteLine("Error: Pokemon name cannot be empty.");
+                return;
+            }
+
+            // Retrieve Pokemon data
+            var pokemon = await _pokemonApiService.GetPokemonAsync(pokemonName);
+            
+            // Analyze type effectiveness
+            var result = await _typeEffectivenessService.AnalyzeTypeEffectivenessAsync(pokemon);
+            
+            // Display the analysis result
+            DisplayAnalysisResult(result);
+        }
+        catch (Exception ex)
+        {
+            System.Console.WriteLine($"Error: Failed to analyze Pokemon '{pokemonName}': {ex.Message}");
+        }
+    }
 }
