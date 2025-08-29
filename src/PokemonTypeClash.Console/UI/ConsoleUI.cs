@@ -18,6 +18,11 @@ public class ConsoleUI : IConsoleUI
     }
 
     /// <summary>
+    /// Gets or sets whether the application is running in command-line mode
+    /// </summary>
+    public bool IsCommandLineMode { get; set; }
+
+    /// <summary>
     /// Displays the main menu to the user with arrow key navigation
     /// </summary>
     /// <returns>The selected menu option (1-4)</returns>
@@ -501,10 +506,14 @@ public class ConsoleUI : IConsoleUI
         System.Console.WriteLine("✗ Vulnerable To: Types this Pokemon takes super effective damage from");
         System.Console.ResetColor();
         System.Console.WriteLine();
-        System.Console.ForegroundColor = ConsoleColor.Cyan;
-        System.Console.WriteLine("Press any key to continue...");
-        System.Console.ResetColor();
-        System.Console.ReadKey();
+        // Only wait for user input if not in command-line mode
+        if (!IsCommandLineMode)
+        {
+            System.Console.ForegroundColor = ConsoleColor.Cyan;
+            System.Console.WriteLine("Press any key to continue...");
+            System.Console.ResetColor();
+            System.Console.ReadKey();
+        }
     }
 
     /// <summary>
@@ -602,8 +611,11 @@ public class ConsoleUI : IConsoleUI
                     break;
                 default:
                     ShowError("Invalid option. Please choose 1-4.");
-                    System.Console.WriteLine("Press any key to continue...");
-                    System.Console.ReadKey();
+                    if (!IsCommandLineMode)
+                    {
+                        System.Console.WriteLine("Press any key to continue...");
+                        System.Console.ReadKey();
+                    }
                     break;
             }
         }
@@ -812,11 +824,14 @@ public class ConsoleUI : IConsoleUI
         System.Console.ResetColor();
         System.Console.WriteLine();
         
-        // Navigation prompt
-        System.Console.ForegroundColor = ConsoleColor.Yellow;
-        System.Console.Write("  Press any key to return to the main menu... ");
-        System.Console.ResetColor();
-        System.Console.ReadKey();
+        // Only wait for user input if not in command-line mode
+        if (!IsCommandLineMode)
+        {
+            System.Console.ForegroundColor = ConsoleColor.Yellow;
+            System.Console.Write("  Press any key to return to the main menu... ");
+            System.Console.ResetColor();
+            System.Console.ReadKey();
+        }
     }
 
     /// <summary>

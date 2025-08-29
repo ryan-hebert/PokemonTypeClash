@@ -77,6 +77,9 @@ public class Program
     {
         try
         {
+            // Set command-line mode to avoid interactive prompts
+            consoleUI.IsCommandLineMode = true;
+            
             // Parse command and arguments
             var command = args[0].ToLowerInvariant();
             var commandArgs = args.Skip(1).ToArray();
