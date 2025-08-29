@@ -382,7 +382,7 @@ public class ConsoleUI : IConsoleUI
             System.Console.ForegroundColor = ConsoleColor.Green;
             System.Console.Write("🛡️  Immune To:     ");
             var immuneTypes = string.Join(", ", result.ImmuneTo.Select(t => char.ToUpperInvariant(t.Name[0]) + t.Name[1..]));
-            var padding = 56 - immuneTypes.Length;
+            var padding = 57 - immuneTypes.Length;
             System.Console.Write(immuneTypes);
             System.Console.Write(new string(' ', Math.Max(0, padding)));
             System.Console.ForegroundColor = ConsoleColor.Blue;
