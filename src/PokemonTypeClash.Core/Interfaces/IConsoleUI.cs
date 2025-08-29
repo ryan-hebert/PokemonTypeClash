@@ -31,7 +31,7 @@ public interface IConsoleUI
     /// Displays the type analysis result to the user
     /// </summary>
     /// <param name="result">The analysis result to display</param>
-    void DisplayAnalysisResult(TypeAnalysisResult result);
+    Task DisplayAnalysisResult(TypeAnalysisResult result);
     
     /// <summary>
     /// Displays an error message to the user

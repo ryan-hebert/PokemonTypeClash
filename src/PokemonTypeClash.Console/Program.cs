@@ -33,11 +33,17 @@ public class Program
             // Build service collection
             var services = new ServiceCollection();
 
-            // Add logging - only show warnings and errors to keep user output clean
+            // Add configuration
+            services.AddSingleton<IConfiguration>(configuration);
+
+            // Add logging - disable console logging for end users to keep output clean
             services.AddLogging(builder =>
             {
+                // Only enable logging in debug mode
+                #if DEBUG
                 builder.AddConsole();
                 builder.SetMinimumLevel(LogLevel.Warning);
+                #endif
             });
 
             // Add Console services (includes Infrastructure and Application services)
@@ -45,6 +51,8 @@ public class Program
 
             // Build service provider
             var serviceProvider = services.BuildServiceProvider();
+
+
 
             // Get the console UI service
             var consoleUI = serviceProvider.GetRequiredService<IConsoleUI>();
@@ -62,9 +70,26 @@ public class Program
                 return 0;
             }
         }
-        catch (Exception ex)
+        catch (Exception
+            #if DEBUG
+            ex
+            #endif
+        )
         {
-            System.Console.WriteLine($"Fatal error: {ex.Message}");
+            // Graceful error handling - don't show technical details to end users
+            System.Console.WriteLine();
+            System.Console.WriteLine("❌ An unexpected error occurred. Please try again.");
+            System.Console.WriteLine();
+            System.Console.WriteLine("If the problem persists, please check:");
+            System.Console.WriteLine("• Your internet connection");
+            System.Console.WriteLine("• That you're using the latest version");
+            System.Console.WriteLine();
+            
+            // Log the actual error for debugging (only in development)
+            #if DEBUG
+            System.Console.WriteLine($"Debug Info: {ex.Message}");
+            #endif
+            
             return 1;
         }
     }
@@ -121,9 +146,21 @@ public class Program
                     return 1;
             }
         }
-        catch (Exception ex)
+        catch (Exception
+            #if DEBUG
+            ex
+            #endif
+        )
         {
-            System.Console.WriteLine($"Error: {ex.Message}");
+            // Graceful error handling for command-line mode
+            System.Console.WriteLine("❌ An error occurred while processing your request.");
+            System.Console.WriteLine("Please check your input and try again.");
+            
+            // Log the actual error for debugging (only in development)
+            #if DEBUG
+            System.Console.WriteLine($"Debug Info: {ex.Message}");
+            #endif
+            
             return 1;
         }
     }

@@ -12,6 +12,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.8" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.8" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.8" />
+    <PackageReference Include="Spectre.Console" Version="0.48.0" />
   </ItemGroup>
 
   <PropertyGroup>
@@ -20,20 +21,18 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     
-    <!-- Suppress trim warnings for known safe operations -->
-    <SuppressTrimAnalysisWarnings>true</SuppressTrimAnalysisWarnings>
-    
-    <!-- Enable trim analysis but suppress warnings -->
-    <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
-    <TrimAnalysisWarningsAsErrors>false</TrimAnalysisWarningsAsErrors>
+    <!-- Disable trimming for Spectre.Console compatibility -->
+    <PublishTrimmed>false</PublishTrimmed>
+    <EnableTrimAnalyzer>false</EnableTrimAnalyzer>
   </PropertyGroup>
 
-  <!-- Trim configuration -->
+  <!-- Copy appsettings.json to output directory -->
   <ItemGroup>
-    <TrimmerRootAssembly Include="PokemonTypeClash.Infrastructure" />
-    <TrimmerRootAssembly Include="PokemonTypeClash.Application" />
-    <TrimmerRootAssembly Include="PokemonTypeClash.Core" />
-    <TrimmerRootDescriptor Include="TrimmerRootAssembly.xml" />
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
+
+
 
 </Project>
